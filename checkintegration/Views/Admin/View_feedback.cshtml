@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "View_feedback";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row" style="margin-left:30px;width:1000px;">
+    <h2>View_feedback</h2>
+
+    <table id="catmst" class="display">
+        <thead>
+            <tr>
+                <th>
+                    UserId
+                </th>
+                <th>
+                    CustomerId
+                </th>
+                <th>
+                    Date
+                </th>
+                <th>
+                    Feedback
+                </th>
+                
+            </tr>
+        </thead>
+    </table>
+
+
+</div>
+
+<link href="//cdn.dataTables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.dataTables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+    var Popup, dataTable;
+    $(document).ready(function () {
+    dataTable = $("#catmst").DataTable({
+    "ajax": {
+    "url": "@Url.Action("feedbk", "Admin")",
+    "type": "GET",
+    "datatype": "json"
+    },
+    "columns": [
+
+    { "data": "UserId", "width": "50px" },
+    { "data": "CustId", "width": "50px" },
+    { "data": "Date", "width": "200px", "orderable": false },
+    { "data": "feedback", "width": "250px", "orderable": false },
+   
+
+    ]
+    });
+    });
+    </script>
+}
+

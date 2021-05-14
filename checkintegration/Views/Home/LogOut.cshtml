@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "LogOut";
+    Layout = "~/Views/Shared/_MyLayout1.cshtml";
+}
+
+<h2>LogOut</h2>
+
+public ActionResult LogOut()
+{
+    FormsAuthentication.SignOut();
+    return RedirectToAction("Index", "Home");
+}

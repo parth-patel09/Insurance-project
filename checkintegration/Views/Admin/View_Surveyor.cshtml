@@ -1,0 +1,145 @@
+﻿@model IEnumerable<checkintegration.Models.Registration>
+@{
+    ViewBag.Title = "View_Surveyor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="row" style="margin-left:30px;width:1000px;">
+    <h2>View_Surveyor</h2>
+
+    <table id="catmst" class="display">
+        <thead>
+            <tr>
+                <th>
+                    FirstName
+                </th>
+                <th>
+                    LastName
+                </th>
+                <th>
+                    Email Id
+                </th>
+                <th>
+                    Address
+                </th>
+                <th>
+                    Phone no.
+                </th>
+
+                <th>
+                    
+                </th>
+            </tr>
+        </thead>
+        
+    </table>
+
+
+</div>
+
+<link href="//cdn.dataTables.net/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+@section Scripts{
+    <script src="//cdn.dataTables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            dataTable = $("#catmst").DataTable({
+                "ajax": {
+                "url": "@Url.Action("GetSurveyor","Admin")",
+                "type": "GET",
+                "datatype": "json"
+            },
+            "columns": [
+
+                { "data": "FirstName" },
+                { "data": "LastName","orderable":false },
+                { "data": "EmailId", "orderable": false  },
+                { "data": "Address", "orderable": false  },
+                { "data": "PhoneNumber", "orderable": false  },
+                { "data": "UserID", "render": function (data) {
+                    return "<a class='btn btn-default btn-sm' onclick=PopupForm('@Url.Action("AddorEditSurveyor","Admin")/" + data + "')><li class='fa fa-pencil' ></li> Edit</a><a style='margin-left:5px;'class='btn btn-danger btn-sm'  onclick=Delete(" + data +")><li class='fa fa-trash'></li> Delete</a>";
+                }, "orderable": false,
+                    "width": "150px"
+                }
+            ]
+        });
+        });
+        function PopupForm(url) {
+            var formDiv = $('<div/>');
+            $.get(url)
+                .done(function (response) {
+                    formDiv.html(response);
+
+                    Popup = formDiv.dialog({
+                        autoOpen: true,
+                        resizable: false,
+                        title: 'Users',
+                        height: 500,
+                        width: 400,
+                        close: function () {
+                            Popup.dialog('destroy').remove();
+                        }
+
+                    });
+                });
+        }
+        function SubmitForm(form) {
+            $.validator.unobtrusive.parse(form);
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    success: function (data) {
+                        if (data.success) {
+                            Popup.dialog('close');
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                        else {
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "error"
+                            })
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+        function Delete(id) {
+            if (confirm('Are You Sure to Delete this Customerdetail ?')) {
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("DeleteServeyor", "Admin")/' + id,
+                    success: function (data) {
+                        if (data.success) {
+                            dataTable.ajax.reload();
+
+                            $.notify(data.message, {
+                                globalPosition: "top center",
+                                className: "success"
+                            })
+
+                        }
+                    }
+
+                });            }
+        }
+    </script>
+}
+
+
+
+ 
+
+

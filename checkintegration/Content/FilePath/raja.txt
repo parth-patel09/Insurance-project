@@ -1,0 +1,98 @@
+ new { enctype = "multipart/form-data"}
+[HttpPost]
+        public ActionResult AddOrEditItem(FormCollection fc, HttpPostedFileBase file)
+        {
+            ItemMst im = new ItemMst();
+            im.ItemName = fc[0];
+            string name1 = fc[1];
+            string compname = fc[2];
+
+            var a = ent.CatagoryMsts.Where(m => m.Name == name1).FirstOrDefault();
+            var b = ent.CompanyMsts.Where(m => m.ComanyName == compname).FirstOrDefault();
+            if (a != null & b != null)
+            {
+                im.CatId = a.CatId;
+                im.CompanyId = b.CompanyId;
+                im.Combination = fc[3];
+                im.Proportion = fc[4];
+                im.GenericName = fc[5];
+                im.Description = fc[6];
+                im.SellingPrice = Convert.ToDouble(fc[7]);
+                im.Tax = Convert.ToDouble(fc[8]);
+                im.MinStock = Convert.ToInt16(fc[9]);
+
+
+                if (file != null)
+                {
+                    string path = Path.Combine(Server.MapPath("~/Adminassets/images/Item"), Path.GetFileName(file.FileName));
+                    string name = Path.GetFileName(file.FileName);
+                    file.SaveAs(path);
+                    im.Image = "/Adminassets/images/Item/" + name;
+
+
+                    //string newFileName = string.Empty;
+                    //if (file != null)
+                    //{
+                    //    string pic = System.IO.Path.GetFileName(file.FileName);
+                    //    FileInfo fi = new FileInfo(pic);
+                    //    string fileextension = fi.Extension.Substring(1).ToUpper();
+                    //    newFileName = Convert.ToString(Guid.NewGuid()) + "." + fileextension;
+                    //    var FolderPath = "~/uploads/";
+                    //    var Imgpath = Path.Combine(Server.MapPath(FolderPath), newFileName);
+                    //    file.SaveAs(Imgpath);
+                    //    newFileName = FolderPath + newFileName;
+                    //    cat.Image = newFileName;
+                    //}
+
+                }
+                else
+                {
+
+
+                    im.Image = "/Adminassets/images/Item/" + "tablets_2843.png";
+                }
+                im.ItemId = Convert.ToInt16(fc[10]);
+                var i = ent.ItemMsts.Find(im.ItemId);
+                if (i == null)
+                {
+                    ent.ItemMsts.Add(im);
+                    ent.SaveChanges();
+                    StockMst sm = new StockMst();
+
+                    var lastRow = (from r in ent.ItemMsts orderby r.ItemId descending select r).FirstOrDefault();
+
+                    sm.ItemId = lastRow.ItemId;
+                    sm.CurrentStock = lastRow.MinStock;
+                    ent.StockMsts.Add(sm);
+                    ent.SaveChanges();
+
+
+
+
+                    ViewBag.Success = "Added Successfully";
+                }
+                else
+                {
+                    ent.Entry(i).State = EntityState.Detached;
+                    ent.Entry(im).State = EntityState.Modified;
+                    ent.SaveChanges();
+                    ViewBag.Success = "Updated Successfully";
+                }
+            }
+            else
+            {
+                if (a == null) ViewBag.Success = "Select Proper Category";
+                if (b == null) ViewBag.Success = "Select Proper Company";
+                else
+                {
+                    ViewBag.Success = "Select Proper Company and Category";
+                }
+
+            }
+            return RedirectToAction("AddItem", "Admin", new { status = ViewBag.Success });
+
+
+
+
+
+        }

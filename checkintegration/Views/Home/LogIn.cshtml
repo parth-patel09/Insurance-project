@@ -1,0 +1,50 @@
+﻿@model checkintegration.Models.Registration
+
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_MyLayout1.cshtml";
+}
+
+<h2>LogIn</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Login Failed, check details");
+                                                                
+    <div>
+        <div class="container">
+            <fieldset>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.UserName, new { style = "font-size:20px" })
+                    <div>
+                        @Html.TextBoxFor(model => model.UserName, new { style = "width:300px;",  @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName)
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Password, new { style = "font-size:20px" })
+                    <div>
+                        @Html.PasswordFor(model => model.Password, new { style = "width:300px;",  @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Log In" class="btn btn-default" />
+                </div>
+
+                <div class="form-group">
+                     @Html.ActionLink("Forgot password ??", "ForgotPassword", "Home", new { @style = "color:#E91E63; font-size:10px" })
+                </div>
+
+                <div class="form-group">
+                    @Html.ActionLink("Change Password", "Change_Password", "Home", new { @style = "color:#E91E63; font-size:10px" })
+                </div>
+            </fieldset>
+            </div>
+        </div>
+}

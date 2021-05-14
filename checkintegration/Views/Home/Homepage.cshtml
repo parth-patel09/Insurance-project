@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "Homepage";
+    Layout = "~/Views/Shared/_CustomerLayouot.cshtml";
+}
+
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="pageTitle">Homepage</h2>
+            </div>
+        </div>
+    </div>
+</section>
+            
+    @if (Request.IsAuthenticated)
+    {
+       
+           
+                <div class="container">
+                   
+
+                <div class="row">
+                    <div class="col-md-11">
+                        <strong style="color:#E91E63; font-size:20px">Welcome to Insure @Html.Encode(User.Identity.Name)</strong>
+                    </div>
+
+                </div>
+            </div>
+        
+   
+    
+    }
+    <!--  else
+     {
+            @Html.ActionLink("Register", "Register", "Home")
+            <span> | </span>
+            @Html.ActionLink("Log In", "Login", "Home")
+     }
+    -->
+
+
+            <div id="demo-1" data-zs-src='["/Content/img/photos/img1.jpg", "/Content/img/photos/img2.jpg", "/Content/img/photos/img3.jpg"]' data-zs-overlay="dots">
+                <div class="demo-inner-content">
+                    <h1><span>Insure</span></h1><br />
+                    <p>Always be there to help you</p>
+                </div>
+            </div>
+
+            <section class="projects">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="aligncenter"><h2 class="aligncenter">Our Featured Projects</h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores quae porro consequatur aliquam, incidunt eius magni provident, <br />doloribus omnis minus ovident, doloribus omnis minus temporibus perferendis nesciunt..</div>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="row service-v1 margin-bottom-40">
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <div class="card small">
+                                <div class="card-image">
+                                    <img class="img-responsive" src=@Url.Content("/Content/img/photos/IMG-20170819-WA0028.jpg") alt="">
+                                </div>
+                                <div class="card-content">
+                                    <p>
+                                      <!--  <span class="price">$4.00 Lacs - 8.28 Lacs</span>-->
+                                        <h4>Accident Registered</h4>
+                                        <h5>India</h5>
+                                        <a class="btn btn-details" href="@Url.Action("Accident_Register", "Home")">Register</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <div class="card small">
+                                <div class="card-image">
+                                    <img class="img-responsive" src=@Url.Content("/Content/img/photos/49fad66ae3b5c14e6d9d3ef79c138297.jpg") alt="">
+                                </div>
+                                <div class="card-content">
+                                    <p>
+                                        <!--<span class="price">$4.00 Lacs - 8.28 Lacs</span>-->
+                                        <h4>Fill Report</h4>
+                                        <h5>India</h5>
+                                        <a href="details.html" class="btn btn-details">Details</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 md-margin-bottom-40">
+                            <div class="card small">
+                                <div class="card-image">
+                                    <img class="img-responsive" src=@Url.Content("/content/img/photos/800px_COLOURBOX18748092.jpg") alt="">
+                                </div>
+                                <div class="card-content">
+                                    <p>
+                                        <!--<span class="price">$4.00 Lacs - 8.28 Lacs</span>-->
+                                        <h4>View Policy</h4>
+                                        <h5>India</h5>
+                                        <a href="details.html" class="btn btn-details">Details</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section-padding gray-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="section-title text-center">
+                                <h2>What our job?</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="about-image">
+                                <img src="/Content/img/s1.jpg" alt="About Images">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="about-text">
+                                <h3>About Us</h3>
+                                <p>Our company provides a Dynamic Web Application in which client can easily communicate with his Insurance Company when he meets with an accident to get his Claim amount.</p>
+                                <p>It is a broad purpose application in Client can provide basic details of accident such as Images of Vehicle at Accident Location and Vehicle Number.</p>
+                                <a href="#" class="btn btn-primary waves-effect waves-dark">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+

@@ -1,0 +1,107 @@
+﻿@model checkintegration.Models.GarrageMaster
+@{
+    ViewBag.Title = "AddGarrage";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>AddGarrage</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true, "Registeration Failed, fields.");
+    <div>
+        <h3>@ViewBag.Error</h3>
+        <div class="container">
+            <fieldset>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.Name, new { style = "width:300px;", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Address, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.Address, new { style = "width:300px;", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PhoneNo, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.PhoneNo, new { style = "width:300px;", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PhoneNo)
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.OwnerName, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.OwnerName, new { style = "width:300px;" })
+                                @Html.ValidationMessageFor(model => model.OwnerName)
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.Description, new { style = "width:300px;" })
+                                @Html.ValidationMessageFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IsAuth, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.IsAuth, new { style = "width:300px;" })
+                                @Html.ValidationMessageFor(model => model.IsAuth)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CreatedBy, new { style = "font-size:20px" })
+                            <div class="col-l-1">
+                                @Html.TextBoxFor(model => model.CreatedBy, new { style = "width:300px;" })
+                                @Html.ValidationMessageFor(model => model.CreatedBy)
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+              
+                <div class="form-group">
+
+                    <input type="submit" value="Register" class="btn btn-default" />
+
+                </div>
+
+            </fieldset>
+        </div>
+    </div>
+
+
+}

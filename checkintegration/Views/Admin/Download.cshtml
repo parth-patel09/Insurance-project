@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Download";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+@{
+
+    ViewBag.Title = "Download Files";
+    var Files = (ViewBag.Files as string[]);
+
+    if (Files != null && Files.Any())
+    {
+        foreach (var file in Files)
+        {
+            <br />
+            @Html.ActionLink(file, "DownloadFile", new { fileName = file })
+            <br />
+        }
+    }
+    else
+    {
+        <label>No File(s) to Download</label>
+    }
+}
